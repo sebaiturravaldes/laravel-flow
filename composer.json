@@ -1,0 +1,24 @@
+{
+    "name": "siturra/flow",
+    "description": "Integración en Laravel con la pasarela de pago Flow",
+    "keywords" : ["laravel4","laravel5","laravel","flow","flowpayment","chile"],
+    "license": "MIT",
+    "authors": [
+        {
+          "name": "Sebastian Iturra",
+          "email": "adam@laravelcollective.com"
+        },
+        {
+          "name": "Taylor Otwell",
+          "email": "taylor@laravel.com"
+        }
+    ],
+    "autoload":{
+    	"psr-4": {
+    		"Siturra\\Flow\\": "src/"
+    	}
+    },
+    "require": {
+    	"illuminate/support": "~5"
+    }
+}
