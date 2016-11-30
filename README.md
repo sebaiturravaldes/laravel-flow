@@ -84,3 +84,8 @@ protected $except = [
 ...
 ?>
 ```
+
+### Usar
+```
+http://localhost/payment/flow/index
+```
