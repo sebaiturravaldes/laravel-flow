@@ -15,7 +15,7 @@ return [
     * 
     * @var string
     */
-    'url_exito' => 'http://localhost/myproyect/public/payment/flow/success',
+    'url_exito' => 'http://localhost/myproject/public/payment/flow/success',
 
     /**
     * Ingrese aquí la URL de su página de fracaso
@@ -23,7 +23,7 @@ return [
     * 
     * @var string
     */
-    'url_fracaso' => 'http://localhost/myproyect/public/payment/flow/failure',
+    'url_fracaso' => 'http://localhost/myproject/public/payment/flow/failure',
 
     /**
     * Ingrese aquí la URL de su página de confirmación
@@ -31,7 +31,7 @@ return [
     * 
     * @var string
     */
-    'url_confirmacion' => 'http://localhost/myproyect/public/payment/flow/confirm',
+    'url_confirmacion' => 'http://localhost/myproject/public/payment/flow/confirm',
 
     /**
     * Ingrese aquí la URL de su página de retorno
