@@ -1,6 +1,8 @@
 # Laravel Flow
 Integración en Laravel con la pasarela de pago [Flow](http://www.flow.cl)
 
+Este paquete es un simple Service Provider adaptado a Laravel del [Kit de Integración de Flow](https://www.flow.cl/apiFlow.php).
+
 ## Instalación
 
 ### Paso 1: Instalar a través de Composer
@@ -15,7 +17,7 @@ Una vez que Composer haya instalado o actualizado sus paquetes, deberá registra
 ```php
 'providers' => array(
     …
-	Siturra\Flow\FlowServiceProvider::class,
+    Siturra\Flow\FlowServiceProvider::class,
     …
 ),
 ```
@@ -26,7 +28,7 @@ En el archivo `config/app.php`, agregar la siguiente línea al array `aliases`:
 ```php
 'aliases' => array(
     …
-	'Flow' => Siturra\Flow\FlowFacade::class,
+    'Flow' => Siturra\Flow\FlowFacade::class,
     …
 ),
 ```
@@ -48,8 +50,6 @@ $ php artisan vendor:publish --tag=flow
 Tus certificados digitales deben ir en: `storage/app/flow/keys`.
 
 ## Utilización
-
-Este paquete es un simple Service Provider adaptado a Laravel del [Kit de Integración de Flow](https://www.flow.cl/apiFlow.php).
 
 ### Agregar a tu `routes`, las siguientes rutas:
 

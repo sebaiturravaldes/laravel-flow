@@ -53,13 +53,6 @@ class FlowServiceProvider extends ServiceProvider
             __DIR__.'/FlowController.php' => base_path('app/Http/Controllers/FlowController.php'),
         ], 'flow');
 
-        /*
-        $this->loadViewsFrom(__DIR__.'/views', 'flow');
-        $this->publishes([
-            __DIR__.'/views/' => resource_path('views/flow'),
-        ]);
-        */
-
     }
 
     /**

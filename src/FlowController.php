@@ -41,8 +41,7 @@ class FlowController extends Controller
 /**
  * Página de confirmación del Comercio
  */
-    public function confirm()
-    {
+    public function confirm(){
 
         try {
             // Lee los datos enviados por Flow
