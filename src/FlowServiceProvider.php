@@ -47,9 +47,9 @@ class FlowServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/flow.php' => config_path('flow.php'),
+            __DIR__.'/config/flow.php'    => config_path('flow.php'),
             __DIR__.'/resources/views/'   => base_path('resources/views'),
-            __DIR__.'/storage/' => base_path('storage'),
+            __DIR__.'/storage/'           => base_path('storage'),
             __DIR__.'/FlowController.php' => base_path('app/Http/Controllers/FlowController.php'),
         ], 'flow');
 
