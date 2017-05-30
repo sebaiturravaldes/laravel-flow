@@ -18,23 +18,24 @@ class FlowController extends Controller
     public function orden(Request $request){
 
         $orden = [
-            'orden_compra' => $request->orden,
-            'monto'           => $request->monto,
-            'concepto'        => $request->concepto,
-            'email_pagador'   => $request->pagador,
-            //'medio_pago'     => $request->medio_pago,
+            'orderBuy'     => $request->orden,
+            'amount'       => $request->monto,
+            'concepto'     => $request->concepto,
+            'emailPayer'   => $request->pagador,
+            //'medio_pago' => $request->medio_pago,
         ];
         
     #Aqui debemos verificar la entrada...
-        if (!is_numeric($orden['orden_compra'])) {
+        if (!is_numeric($orden['orderBuy'])) {
             dd("Error #1: Orden debe ser number");
         }
 
         // Genera una nueva Orden de Pago, Flow la firma y retorna un paquete de datos firmados
-        $orden['flow_pack'] = Flow::new_order($orden['orden_compra'], $orden['monto'], $orden['concepto'], $orden['email_pagador']);
+        $orden['flow_pack'] = Flow::new_order($orden['orderBuy'], $orden['amount'], $orden['concepto'], $orden['emailPayer']);
 
         // Si desea enviar el medio de pago usar la siguiente línea
-        //$orden['flow_pack'] = Flow::new_order($orden['orden_compra'], $orden['monto'], $orden['concepto'], $orden['email_pagador'], $orden['medio_pago']);
+        //$orden['flow_pack'] = Flow::new_order($orden['orderBuy'], $orden['amount'], $orden['concepto'], $orden['emailPayer'], $orden['medio_pago']);
+
         return view('flow.orden', compact('orden'));
     }
 
@@ -50,24 +51,24 @@ class FlowController extends Controller
         } catch (\Exception $e) {
             // Si hay un error responde false
             Flow::build_response(false);
-            return;
+            return false;
         }
 
         //Recupera Los valores de la Orden
-        $FLOW_STATUS  = $data->getStatus();  //El resultado de la transacción (EXITO o FRACASO)
-        $ORDEN_NUMERO = $data->getOrderNumber(); // N° Orden del Comercio
-        $MONTO        = $data->getAmount(); // Monto de la transacción
-        $ORDEN_FLOW   = $data->getFlowNumber(); // Si $FLOW_STATUS = "EXITO" el N° de Orden de Flow
-        $PAGADOR      = $data->getPayer(); // El email del pagador
+        $status          = $data->getStatus();  //El resultado de la transacción (EXITO o FRACASO)
+        $orderNumber     = $data->getOrderNumber(); // N° Orden del Comercio
+        $amount          = $data->getAmount(); // Monto de la transacción
+        $orderFlowNumber = $data->getFlowNumber(); // Si $FLOW_STATUS = "EXITO" el N° de Orden de Flow
+        $emailPayer      = $data->getPayer(); // El email del pagador
 
-        if($FLOW_STATUS == "EXITO") {
+        if($status == "EXITO") {
             // La transacción fue aceptada por Flow
             // Aquí puede actualizar su información con los datos recibidos por Flow
-            echo $data->build_response(true); // Comercio envía recepción de la confirmación
+            return $data->build_response(true);
         } else {
             // La transacción fue rechazada por Flow
             // Aquí puede actualizar su información con los datos recibidos por Flow
-            echo $data->build_response(true); // Comercio envía recepción de la confirmación
+            return $data->build_response(false);
         }
 
     }
@@ -89,11 +90,11 @@ class FlowController extends Controller
 
         //Recupera los datos enviados por Flow
         $data = [
-            'ordenCompra' => Flow::getOrderNumber(),
-            'monto'       => Flow::getAmount(),
-            'concepto'    => Flow::getConcept(),
-            'pagador'     => Flow::getPayer(),
-            'flowOrden'   => Flow::getFlowNumber(),
+            'orderNumber'     => Flow::getOrderNumber(),
+            'amount'          => Flow::getAmount(),
+            'concept'         => Flow::getConcept(),
+            'payer'           => Flow::getPayer(),
+            'orderFlowNumber' => Flow::getFlowNumber(),
         ];
 
         return view('flow.success', compact('data'));
@@ -115,11 +116,11 @@ class FlowController extends Controller
 
         //Recupera los datos enviados por Flow
         $data = [
-            'ordenCompra' => Flow::getOrderNumber(),
-            'monto'       => Flow::getAmount(),
-            'concepto'    => Flow::getConcept(),
-            'pagador'     => Flow::getPayer(),
-            'flowOrden'   => Flow::getFlowNumber(),
+            'orderNumber'     => Flow::getOrderNumber(),
+            'amount'          => Flow::getAmount(),
+            'concept'         => Flow::getConcept(),
+            'payer'           => Flow::getPayer(),
+            'orderFlowNumber' => Flow::getFlowNumber(),
         ];
 
         return view('flow.failure', compact('data'));
